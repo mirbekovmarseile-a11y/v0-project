@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
+import { motion, useInView, useScroll, useTransform, useSpring } from "framer-motion"
 import { useRef } from "react"
 import { FadeIn, AnimatedCounter } from "./animations"
 import { MagneticButton, TiltCard } from "./effects/magnetic"
@@ -9,16 +9,38 @@ import { Typewriter } from "./effects/typewriter"
 
 export function Hero() {
   const titleRef = useRef<HTMLHeadingElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(titleRef, { once: true })
+  
+  // Scroll-based animations for robot
+  const { scrollY } = useScroll()
+  
+  // Transform values based on scroll
+  const robotY = useTransform(scrollY, [0, 800], [0, 150])
+  const robotRotate = useTransform(scrollY, [0, 800], [0, 15])
+  const robotScale = useTransform(scrollY, [0, 400], [1, 1.1])
+  const robotOpacity = useTransform(scrollY, [0, 600], [0.5, 0.15])
+  const glowIntensity = useTransform(scrollY, [0, 400], [0.15, 0.4])
+  
+  // Smooth spring animations
+  const smoothY = useSpring(robotY, { stiffness: 50, damping: 20 })
+  const smoothRotate = useSpring(robotRotate, { stiffness: 50, damping: 20 })
+  const smoothScale = useSpring(robotScale, { stiffness: 50, damping: 20 })
 
   return (
-    <section className="pt-[140px] pb-20 relative overflow-hidden">
-      {/* Robot background image */}
+    <section ref={sectionRef} className="pt-[140px] pb-20 relative overflow-hidden">
+      {/* Robot background image with scroll animations */}
       <motion.div 
         className="absolute top-0 right-0 w-[60%] h-full pointer-events-none"
         initial={{ opacity: 0, scale: 1.1 }}
-        animate={{ opacity: 0.4, scale: 1 }}
+        animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
+        style={{
+          y: smoothY,
+          rotate: smoothRotate,
+          scale: smoothScale,
+          opacity: robotOpacity,
+        }}
       >
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -28,8 +50,63 @@ export function Hero() {
             WebkitMaskImage: "linear-gradient(to left, black 30%, transparent 100%)"
           }}
         />
+        {/* Animated glow effect */}
+        <motion.div 
+          className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,107,26,0.3),transparent_70%)]"
+          animate={{ 
+            opacity: [0.3, 0.6, 0.3],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{ 
+            duration: 3, 
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
         <div className="absolute inset-0 bg-gradient-to-l from-transparent via-bg/50 to-bg" />
       </motion.div>
+      
+      {/* Dynamic glow that intensifies on scroll */}
+      <motion.div 
+        className="absolute top-0 right-0 w-full h-full pointer-events-none"
+        style={{
+          background: `radial-gradient(ellipse at top right, rgba(255, 107, 26, var(--glow)), transparent 60%)`,
+        }}
+      >
+        <motion.div 
+          className="w-full h-full"
+          style={{ 
+            opacity: glowIntensity,
+            background: "radial-gradient(ellipse at top right, rgba(255, 107, 26, 0.3), transparent 60%)" 
+          }}
+        />
+      </motion.div>
+      
+      {/* Floating particles around robot */}
+      <div className="absolute top-[20%] right-[15%] pointer-events-none">
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 rounded-full bg-orange/60"
+            style={{
+              left: `${Math.random() * 200}px`,
+              top: `${Math.random() * 300}px`,
+            }}
+            animate={{
+              y: [0, -30, 0],
+              x: [0, Math.random() * 20 - 10, 0],
+              opacity: [0.3, 0.8, 0.3],
+              scale: [1, 1.3, 1],
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              delay: i * 0.5,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+      </div>
       
       {/* Background gradient overlay */}
       <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,rgba(255,107,26,0.15),transparent_60%)] pointer-events-none" />
