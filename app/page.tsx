@@ -11,26 +11,30 @@ import { AnimatedGradient } from "@/components/effects/animated-gradient"
 import { Particles } from "@/components/effects/particles"
 import { CursorGlow } from "@/components/effects/cursor-glow"
 import { ScrollProgress } from "@/components/effects/scroll-progress"
+import { Preloader } from "@/components/effects/preloader"
 
 export default function Home() {
   return (
-    <main className="min-h-screen relative">
-      {/* Background effects */}
-      <AnimatedGradient />
-      <Particles />
-      <CursorGlow />
-      <ScrollProgress />
-      
-      {/* Content */}
-      <div className="relative z-10">
-        <Navigation />
-        <Hero />
-        <Stats />
-        <Services />
-        <Cases />
-        <CTA />
-        <Footer />
-      </div>
-    </main>
+    <>
+      <Preloader />
+      <main className="min-h-screen relative">
+        {/* Background effects */}
+        <AnimatedGradient />
+        <Particles />
+        <CursorGlow />
+        <ScrollProgress />
+        
+        {/* Content */}
+        <div className="relative z-10">
+          <Navigation />
+          <Hero />
+          <Stats />
+          <Services />
+          <Cases />
+          <CTA />
+          <Footer />
+        </div>
+      </main>
+    </>
   )
 }
