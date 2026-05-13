@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, useInView, useScroll, useTransform, useSpring } from "framer-motion"
-import { useRef } from "react"
+import { useRef, useState, useEffect, useMemo } from "react"
 import { FadeIn, AnimatedCounter } from "./animations"
 import { MagneticButton, TiltCard } from "./effects/magnetic"
 import { FloatingElement } from "./effects/floating"
@@ -11,6 +11,22 @@ export function Hero() {
   const titleRef = useRef<HTMLHeadingElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(titleRef, { once: true })
+  const [isMounted, setIsMounted] = useState(false)
+  
+  // Generate stable particle positions on client only
+  const particlePositions = useMemo(() => {
+    if (typeof window === 'undefined') return []
+    return Array.from({ length: 5 }, (_, i) => ({
+      left: Math.random() * 200,
+      top: Math.random() * 300,
+      xOffset: Math.random() * 20 - 10,
+      duration: 3 + Math.random() * 2,
+    }))
+  }, [])
+  
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
   
   // Scroll-based animations for robot
   const { scrollY } = useScroll()
@@ -82,31 +98,33 @@ export function Hero() {
         />
       </motion.div>
       
-      {/* Floating particles around robot */}
-      <div className="absolute top-[20%] right-[15%] pointer-events-none">
-        {[...Array(5)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 rounded-full bg-orange/60"
-            style={{
-              left: `${Math.random() * 200}px`,
-              top: `${Math.random() * 300}px`,
-            }}
-            animate={{
-              y: [0, -30, 0],
-              x: [0, Math.random() * 20 - 10, 0],
-              opacity: [0.3, 0.8, 0.3],
-              scale: [1, 1.3, 1],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: i * 0.5,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-      </div>
+      {/* Floating particles around robot - render only on client */}
+      {isMounted && (
+        <div className="absolute top-[20%] right-[15%] pointer-events-none">
+          {particlePositions.map((particle, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 rounded-full bg-orange/60"
+              style={{
+                left: `${particle.left}px`,
+                top: `${particle.top}px`,
+              }}
+              animate={{
+                y: [0, -30, 0],
+                x: [0, particle.xOffset, 0],
+                opacity: [0.3, 0.8, 0.3],
+                scale: [1, 1.3, 1],
+              }}
+              transition={{
+                duration: particle.duration,
+                repeat: Infinity,
+                delay: i * 0.5,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </div>
+      )}
       
       {/* Background gradient overlay */}
       <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,rgba(255,107,26,0.15),transparent_60%)] pointer-events-none" />
