@@ -13,7 +13,25 @@ export function Hero() {
 
   return (
     <section className="pt-[140px] pb-20 relative overflow-hidden">
-      {/* Background gradient */}
+      {/* Robot background image */}
+      <motion.div 
+        className="absolute top-0 right-0 w-[60%] h-full pointer-events-none"
+        initial={{ opacity: 0, scale: 1.1 }}
+        animate={{ opacity: 0.4, scale: 1 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+      >
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ 
+            backgroundImage: "url('/images/robot-bg.jpg')",
+            maskImage: "linear-gradient(to left, black 30%, transparent 100%)",
+            WebkitMaskImage: "linear-gradient(to left, black 30%, transparent 100%)"
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-bg/50 to-bg" />
+      </motion.div>
+      
+      {/* Background gradient overlay */}
       <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,rgba(255,107,26,0.15),transparent_60%)] pointer-events-none" />
       
       <div className="max-w-[1320px] mx-auto px-8">
