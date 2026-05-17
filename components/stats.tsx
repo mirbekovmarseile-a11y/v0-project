@@ -4,7 +4,6 @@ import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import { FadeIn, AnimatedCounter, StaggerContainer, StaggerItem } from "./animations"
 import { TiltCard } from "./effects/magnetic"
-import { TextReveal } from "./effects/text-reveal"
 
 export function Stats() {
   const ref = useRef<HTMLDivElement>(null)
@@ -56,19 +55,7 @@ export function Stats() {
                 </FadeIn>
                 <div>
                   <h2 className="font-bebas text-[clamp(32px,4vw,56px)] leading-[1.1] tracking-[-0.5px]">
-                    <TextReveal text="Помогаю бизнесу" delay={0.2} />
-                    {" "}
-                    <span className="text-orange italic">
-                      <TextReveal text="расти" delay={0.4} />
-                    </span>
-                    {" "}
-                    <TextReveal text="через системный подход" delay={0.5} />
-                    {" "}
-                    <span className="text-orange italic">
-                      <TextReveal text="к таргету" delay={0.8} />
-                    </span>
-                    {" "}
-                    <TextReveal text="в Meta Ads" delay={0.9} />
+                    Помогаю бизнесу <span className="text-orange italic">расти</span> через системный подход <span className="text-orange italic">к таргету</span> в Meta Ads
                   </h2>
                 </div>
               </div>
