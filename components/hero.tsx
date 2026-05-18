@@ -46,7 +46,7 @@ export function Hero() {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ 
-            backgroundImage: "url('/images/robot-bg.jpg')",
+            backgroundImage: "url('/images/laptop-marketing.jpg')",
             maskImage: "linear-gradient(to left, black 30%, transparent 100%)",
             WebkitMaskImage: "linear-gradient(to left, black 30%, transparent 100%)"
           }}
