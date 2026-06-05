@@ -1,23 +1,13 @@
 "use client"
 
-import { motion, useMotionValue, useTransform } from "framer-motion"
+import { motion } from "framer-motion"
 import { FadeIn } from "./animations"
-import { MagneticButton, TiltCard } from "./effects/magnetic"
-import { useState, useRef } from "react"
+import { TiltCard } from "./effects/magnetic"
+import { LeadForm } from "./lead-form"
+import { useState } from "react"
 
 export function CTA() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: ""
-  })
   const [isHovered, setIsHovered] = useState(false)
-  const formRef = useRef<HTMLFormElement>(null)
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Handle form submission
-  }
 
   return (
     <section className="py-20 relative" id="contact">
@@ -92,65 +82,7 @@ export function CTA() {
               </div>
 
               <FadeIn delay={0.3} direction="left">
-                <form ref={formRef} onSubmit={handleSubmit} className="relative flex flex-col gap-3">
-                  <motion.div
-                    className="relative"
-                    whileHover={{ scale: 1.01 }}
-                    whileFocus={{ scale: 1.01 }}
-                  >
-                    <motion.input
-                      type="text"
-                      placeholder="Ваше имя"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-black/40 border border-border-strong rounded-2xl px-5 py-4 text-text text-sm outline-none transition-all duration-300 focus:border-orange focus:shadow-[0_0_20px_rgba(255,107,26,0.15)] placeholder:text-text-muted"
-                    />
-                  </motion.div>
-                  
-                  <motion.div
-                    className="relative"
-                    whileHover={{ scale: 1.01 }}
-                  >
-                    <motion.input
-                      type="email"
-                      placeholder="Email или телефон"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full bg-black/40 border border-border-strong rounded-2xl px-5 py-4 text-text text-sm outline-none transition-all duration-300 focus:border-orange focus:shadow-[0_0_20px_rgba(255,107,26,0.15)] placeholder:text-text-muted"
-                    />
-                  </motion.div>
-                  
-                  <motion.div
-                    className="relative"
-                    whileHover={{ scale: 1.01 }}
-                  >
-                    <motion.textarea
-                      placeholder="Расскажите о вашем проекте"
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full bg-black/40 border border-border-strong rounded-2xl px-5 py-4 text-text text-sm outline-none transition-all duration-300 focus:border-orange focus:shadow-[0_0_20px_rgba(255,107,26,0.15)] placeholder:text-text-muted min-h-[80px] resize-y"
-                    />
-                  </motion.div>
-                  
-                  <MagneticButton strength={0.15} className="w-full">
-                    <motion.button
-                      type="submit"
-                      className="w-full bg-orange text-black py-4 rounded-2xl font-semibold text-[15px] relative overflow-hidden group"
-                      whileHover={{ 
-                        boxShadow: "0 0 40px rgba(255, 107, 26, 0.4)"
-                      }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      <span className="relative z-10">Получить бесплатный аудит</span>
-                      <motion.div 
-                        className="absolute inset-0 bg-gradient-to-r from-[#ff8533] to-[#ff6b1a]"
-                        initial={{ x: "-100%" }}
-                        whileHover={{ x: 0 }}
-                        transition={{ duration: 0.3 }}
-                      />
-                    </motion.button>
-                  </MagneticButton>
-                </form>
+                <LeadForm source="cta" submitLabel="Получить бесплатный аудит" />
               </FadeIn>
             </motion.div>
           </TiltCard>

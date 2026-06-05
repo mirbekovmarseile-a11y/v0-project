@@ -6,6 +6,7 @@ import { FadeIn, AnimatedCounter } from "./animations"
 import { MagneticButton, TiltCard } from "./effects/magnetic"
 import { FloatingElement } from "./effects/floating"
 import { Typewriter } from "./effects/typewriter"
+import { LeadForm } from "./lead-form"
 
 export function Hero() {
   const titleRef = useRef<HTMLHeadingElement>(null)
@@ -30,9 +31,9 @@ export function Hero() {
 
   return (
     <section ref={sectionRef} className="pt-[140px] pb-20 relative overflow-hidden">
-      {/* Robot background image with scroll animations */}
+      {/* Robot background image with scroll animations - hidden on mobile to keep text readable */}
       <motion.div 
-        className="absolute top-0 right-0 w-[60%] h-full pointer-events-none"
+        className="hidden lg:block absolute top-0 right-0 w-[60%] h-full pointer-events-none"
         initial={{ opacity: 0, scale: 1.1 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
@@ -213,22 +214,7 @@ export function Hero() {
                     <p className="text-[13px] text-text-dim mb-4">
                       Расскажу о вашем проекте за 15 минут
                     </p>
-                    <div className="flex bg-black/40 border border-border rounded-full p-1">
-                      <input 
-                        type="email" 
-                        placeholder="Ваш email"
-                        className="flex-1 bg-transparent border-none text-text px-4 py-2.5 outline-none text-sm placeholder:text-text-muted"
-                      />
-                      <MagneticButton strength={0.1}>
-                        <motion.button 
-                          className="bg-orange text-black px-5 py-2 rounded-full font-semibold text-[13px]"
-                          whileHover={{ boxShadow: "0 0 20px rgba(255, 107, 26, 0.4)" }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          Отправить
-                        </motion.button>
-                      </MagneticButton>
-                    </div>
+                    <LeadForm source="hero" variant="compact" submitLabel="Получить аудит" withMessage={false} />
                   </motion.div>
                 </TiltCard>
               </FloatingElement>

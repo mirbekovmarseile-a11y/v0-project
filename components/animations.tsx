@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
+import { motion, useInView, useReducedMotion } from "framer-motion"
 import { useRef, useEffect, useState } from "react"
 
 interface AnimatedCounterProps {
@@ -71,6 +71,7 @@ export function FadeIn({
 }: FadeInProps) {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: "-50px" })
+  const reduceMotion = useReducedMotion()
 
   const directions = {
     up: { y: 40, x: 0 },
@@ -83,7 +84,7 @@ export function FadeIn({
   return (
     <motion.div
       ref={ref}
-      initial={{ 
+      initial={reduceMotion ? { opacity: 0 } : { 
         opacity: 0, 
         y: directions[direction].y,
         x: directions[direction].x 
@@ -94,8 +95,8 @@ export function FadeIn({
         x: 0 
       } : {}}
       transition={{ 
-        duration,
-        delay,
+        duration: reduceMotion ? 0.3 : duration,
+        delay: reduceMotion ? 0 : delay,
         ease: [0.25, 0.4, 0.25, 1]
       }}
       className={className}

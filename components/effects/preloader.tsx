@@ -1,26 +1,32 @@
 "use client"
 
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
 import { useState, useEffect } from "react"
 
 export function Preloader() {
   const [isLoading, setIsLoading] = useState(true)
   const [progress, setProgress] = useState(0)
+  const reduceMotion = useReducedMotion()
 
   useEffect(() => {
+    if (reduceMotion) {
+      setProgress(100)
+      setIsLoading(false)
+      return
+    }
     const timer = setInterval(() => {
       setProgress(prev => {
         if (prev >= 100) {
           clearInterval(timer)
-          setTimeout(() => setIsLoading(false), 300)
+          setTimeout(() => setIsLoading(false), 250)
           return 100
         }
-        return prev + Math.random() * 15
+        return prev + Math.random() * 22
       })
-    }, 100)
+    }, 90)
 
     return () => clearInterval(timer)
-  }, [])
+  }, [reduceMotion])
 
   return (
     <AnimatePresence>
