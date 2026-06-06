@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { Check } from "lucide-react"
 import { FadeIn } from "./animations"
 import { TiltCard } from "./effects/magnetic"
 import { LeadForm } from "./lead-form"
@@ -56,17 +57,33 @@ export function CTA() {
               
               <div className="relative z-10">
                 <FadeIn delay={0.1}>
-                  <h2 className="font-bebas text-[clamp(40px,5vw,64px)] leading-none tracking-[-1px] mb-5">
-                    Готовы <span className="text-orange italic">увеличить</span>
-                    <br />продажи?
+                  <h2 className="font-bebas text-[clamp(36px,4.5vw,60px)] leading-[1.02] tracking-[-1px] mb-5">
+                    Готовы получать <span className="text-orange italic">стабильный поток</span> клиентов?
                   </h2>
                 </FadeIn>
                 <FadeIn delay={0.2}>
-                  <p className="text-text-dim text-base mb-8">
-                    Оставьте заявку - проведу бесплатный аудит вашей текущей рекламы и расскажу, как увеличить результат минимум на 30%.
+                  <p className="text-text-dim text-base mb-7">
+                    За 30 минут разберём вашу ситуацию, покажу слабые места в воронке и составим план роста на 90 дней. Бесплатно, без обязательств.
                   </p>
                 </FadeIn>
-                
+
+                <FadeIn delay={0.25}>
+                  <ul className="flex flex-col gap-3 mb-8">
+                    {[
+                      "Разбор текущих рекламных кампаний (или плана запуска)",
+                      "Анализ оффера и точек роста",
+                      "Прогноз по заявкам и бюджету",
+                    ].map((item) => (
+                      <li key={item} className="flex items-start gap-3 text-sm text-text">
+                        <span className="mt-0.5 w-5 h-5 shrink-0 rounded-full bg-orange/15 text-orange flex items-center justify-center">
+                          <Check className="w-3 h-3" strokeWidth={3} />
+                        </span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </FadeIn>
+
                 <FadeIn delay={0.3}>
                   <div className="flex items-center gap-4">
                     <motion.div 
@@ -83,6 +100,9 @@ export function CTA() {
 
               <FadeIn delay={0.3} direction="left">
                 <LeadForm source="cta" submitLabel="Получить бесплатный аудит" />
+                <p className="text-[11px] text-text-muted text-center mt-3 leading-relaxed">
+                  Свяжемся в течение 2 часов в рабочее время (10:00–20:00, GMT+6)
+                </p>
               </FadeIn>
             </motion.div>
           </TiltCard>

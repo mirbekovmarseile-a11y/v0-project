@@ -7,6 +7,9 @@ import { submitLead, type LeadFormState } from "@/app/actions/leads"
 
 const initialState: LeadFormState = { status: "idle", message: "" }
 
+const TELEGRAM_USERNAME = "REPLACE_USERNAME"
+const TELEGRAM_URL = `https://t.me/${TELEGRAM_USERNAME}`
+
 function SubmitButton({ label }: { label: string }) {
   const { pending } = useFormStatus()
   const reduceMotion = useReducedMotion()
@@ -66,7 +69,17 @@ export function LeadForm({
           &#10003;
         </div>
         <h3 className="font-bebas text-2xl tracking-[-0.5px] mb-2">Заявка отправлена!</h3>
-        <p className="text-text-dim text-sm">{state.message}</p>
+        <p className="text-text-dim text-sm">
+          Заявка получена! Свяжусь с вами в ближайшие 2 часа. А пока — подписывайтесь на мой Telegram-канал, там разборы реальных кейсов: {TELEGRAM_USERNAME ? `t.me/${TELEGRAM_USERNAME}` : ""}
+        </p>
+        <a
+          href={TELEGRAM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-5 inline-flex items-center justify-center gap-2 bg-orange text-black px-6 py-3 rounded-2xl font-semibold text-sm transition-shadow hover:shadow-[0_0_30px_rgba(255,107,26,0.4)]"
+        >
+          Открыть Telegram
+        </a>
       </motion.div>
     )
   }
@@ -96,14 +109,14 @@ export function LeadForm({
 
       <div>
         <label htmlFor={`${source}-contact`} className="sr-only">
-          Email, телефон или Telegram
+          Telegram, WhatsApp или телефон
         </label>
         <input
           id={`${source}-contact`}
           name="contact"
           type="text"
           required
-          placeholder="Email, телефон или @telegram"
+          placeholder="Telegram, WhatsApp или телефон"
           className={inputClass}
         />
       </div>

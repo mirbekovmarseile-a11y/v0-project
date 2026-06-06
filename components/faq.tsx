@@ -68,7 +68,7 @@ function FaqItem({ q, a, isOpen, onClick }: { q: string; a: string; isOpen: bool
 }
 
 export function Faq() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0)
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
     <section className="py-24 relative" id="faq">

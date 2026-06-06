@@ -10,9 +10,9 @@ export function Stats() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   
   const stats = [
-    { value: "86+", label: "Проектов запущено" },
-    { value: "98%", label: "Клиентов продлевают сотрудничество" },
-    { value: "223М", label: "Рублей оборота клиентов" },
+    { value: "12%", label: "Рост оборота Beauty Lab" },
+    { value: "500К", label: "Сом/мес потолок выпускников" },
+    { value: "3", label: "Направления одной системы" },
   ]
 
   return (
