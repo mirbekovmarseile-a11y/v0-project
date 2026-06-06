@@ -48,8 +48,8 @@ export function Navigation() {
       <div className="max-w-[1320px] mx-auto px-6 md:px-8">
         <div className="flex items-center justify-between">
           <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-            <Link href="/" className="font-bebas text-2xl tracking-[2px] relative group">
-              TARGET<span className="text-orange">.PRO</span>
+            <Link href="/" className="font-bebas text-3xl tracking-[3px] relative group">
+              MARSEL
               <motion.span
                 className="absolute -bottom-1 left-0 h-[2px] bg-orange"
                 initial={{ width: 0 }}

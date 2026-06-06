@@ -48,14 +48,7 @@ export function Preloader() {
               animate={{ opacity: [1, 0.5, 1] }}
               transition={{ duration: 1.5, repeat: Infinity }}
             >
-              TARGET
-            </motion.span>
-            <motion.span 
-              className="text-orange"
-              animate={{ opacity: [0.5, 1, 0.5] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            >
-              .PRO
+              MARSEL
             </motion.span>
           </motion.div>
 
