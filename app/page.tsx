@@ -9,6 +9,7 @@ import { Process } from "@/components/process"
 import { Cases } from "@/components/cases"
 import { Expert } from "@/components/expert"
 import { Reviews } from "@/components/reviews"
+import { Guarantee } from "@/components/guarantee"
 import { Faq } from "@/components/faq"
 import { CTA } from "@/components/cta"
 import { Footer } from "@/components/footer"
@@ -38,6 +39,7 @@ export default function Home() {
           <Cases />
           <Expert />
           <Reviews />
+          <Guarantee />
           <Faq />
           <CTA />
           <Footer />
