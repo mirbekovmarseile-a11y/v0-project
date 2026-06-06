@@ -31,11 +31,11 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-16 mb-16">
           <FadeIn>
             <div>
-              <Link href="/" className="font-[var(--font-bebas)] text-2xl tracking-[2px] inline-block mb-5">
-                TARGET<span className="text-orange">.PRO</span>
+              <Link href="/" className="font-[var(--font-bebas)] text-3xl tracking-[3px] inline-block mb-5">
+                MARSEL
               </Link>
               <p className="text-text-dim text-sm max-w-[280px]">
-                Таргетированная реклама в Meta для бизнеса, который хочет расти системно и предсказуемо.
+                MARSEL — агентство таргета, SMM и продюсирования запусков в Бишкеке. Строим системы продаж для бизнеса любого масштаба.
               </p>
             </div>
           </FadeIn>
@@ -106,7 +106,7 @@ export function Footer() {
 
         <FadeIn>
           <div className="flex flex-col md:flex-row justify-between pt-8 border-t border-border text-text-muted text-[13px] gap-4">
-            <span>© 2024 TARGET.PRO. Все права защищены.</span>
+            <span>© 2026 MARSEL. Все права защищены.</span>
             <span>Сделано с любовью к результату</span>
           </div>
         </FadeIn>
