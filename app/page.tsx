@@ -2,6 +2,7 @@
 
 import { Navigation } from "@/components/navigation"
 import { Hero } from "@/components/hero"
+import { Pains } from "@/components/pains"
 import { Stats } from "@/components/stats"
 import { Services } from "@/components/services"
 import { Cases } from "@/components/cases"
@@ -29,6 +30,7 @@ export default function Home() {
         <div className="relative z-10">
           <Navigation />
           <Hero />
+          <Pains />
           <Stats />
           <Services />
           <Cases />
